@@ -72,8 +72,16 @@ let random = oddsArray[Math.floor(Math.random() * oddsArray.length)];
 
 let randomProduct = Math.floor(Math.random() * 15 + 1);
 
+
+let possibleTimes = [...Array(300).keys()].map(x => x + 30 )
+let times = possibleTimes[Math.floor(Math.random() * possibleTimes.length)];
+
 if(random === 1) {
-    fetchAllProducts(randomClient);
+    for (let i = 0; i < times; i++) {
+        fetchAllProducts(randomClient);
+    }
 } else {
-    fetchOneProduct(randomClient, randomProduct);
+    for (let i = 0; i < times; i++) {
+        fetchOneProduct(randomClient, randomProduct);
+    }
 };
