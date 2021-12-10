@@ -74,7 +74,11 @@ let random = oddsArray[Math.floor(Math.random() * oddsArray.length)];
 let randomOrder = Math.floor(Math.random() * 15 + 1);
 
 if(random === 1) {
-    fetchAllOrders();
+    for (let i = 0; i < 5; i++) {
+        fetchAllOrders();
+    }
 } else {
-    fetchOneOrder(randomOrder);
+    for (let i = 0; i < 5; i++) {
+        fetchOneOrder(randomOrder);
+    }
 };

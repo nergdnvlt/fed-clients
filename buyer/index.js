@@ -11,7 +11,6 @@ async function fetchAllProducts(randomClient) {
         body:JSON.stringify({ query: `query getAllProducts {
             products {
               name
-              upc
               price {
                 usdPrice
                 priceDecorator
