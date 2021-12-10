@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const pry = require('pryjs')
 
 async function fetchAllProducts(randomClient) {
     const response = await fetch('https://apollo-gateway-waaq4qt37q-uc.a.run.app', {
