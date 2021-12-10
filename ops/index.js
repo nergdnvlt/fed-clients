@@ -6,7 +6,7 @@ async function fetchAllOrders() {
         headers: {
             'Content-Type': 'application/json',
             'apollographql-client-name': 'Web',
-            'apollographql-client-Service': 'Ops',
+            'apollographql-client-version': 'Ops',
         },
         body:JSON.stringify({ 
             query: `
