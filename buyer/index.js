@@ -6,7 +6,7 @@ async function fetchAllProducts(randomClient) {
         headers: {
             'Content-Type': 'application/json',
             'apollographql-client-name': randomClient,
-            'apollographql-client-Service': 'Buyer',
+            'apollographql-client-version': 'Buyer'
         },
         body:JSON.stringify({ query: `query getAllProducts {
             products {
@@ -32,7 +32,7 @@ async function fetchOneProduct(randomClient, randomProduct) {
         headers: {
             'Content-Type': 'application/json',
             'apollographql-client-name': randomClient,
-            'apollographql-client-Service': 'Buyer',
+            'apollographql-client-version': 'Buyer'
         },
         body:JSON.stringify({ 
             query: `query getAllProducts($productId: ID!) {
