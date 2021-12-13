@@ -69,7 +69,38 @@ async function fetchOneOrder(randomOrder) {
     return response
 };
 
-let oddsArray = [1, 1, 1, 2, 2 ]
+async function fetchProductList() {
+    const response = await fetch('https://apollo-gateway-waaq4qt37q-uc.a.run.app', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'apollographql-client-name': 'Web',
+            'apollographql-client-version': 'Ops',
+        },
+        body:JSON.stringify({ 
+            query: `
+            query getProductList {
+                products {
+                  name
+                  upc
+                  brand
+                  price {
+                    usdPrice
+                  }
+                }
+            }
+            `
+        })
+    })
+    .then((res) => res.json())
+    .then((result) => {
+        console.log(result.data)
+        return result.data
+    });
+    return response
+};
+
+let oddsArray = [1, 1, 1, 2, 2, 3 ]
 let random = oddsArray[Math.floor(Math.random() * oddsArray.length)];
 let randomOrder = Math.floor(Math.random() * 15 + 1);
 
@@ -77,8 +108,12 @@ if(random === 1) {
     for (let i = 0; i < 5; i++) {
         fetchAllOrders();
     }
-} else {
+} else if (random === 2 ) {
     for (let i = 0; i < 5; i++) {
         fetchOneOrder(randomOrder);
     }
-};
+} else {
+    for (let i = 0; i < 5; i++) {
+        fetchProductList();
+    }
+}
