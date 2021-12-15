@@ -162,7 +162,7 @@ let versions = [
 ]
 let randomVersion = versions[Math.floor(Math.random() * versions.length)];
 
-let oddsArray = [1, 1, 1, 1, 2, 2, 2, 3, 3 ]
+let oddsArray = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4 ]
 let random = oddsArray[Math.floor(Math.random() * oddsArray.length)];
 
 let randomProduct = Math.floor(Math.random() * 15 + 1);
