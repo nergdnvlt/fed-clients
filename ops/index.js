@@ -1,12 +1,12 @@
 const fetch = require('node-fetch');
 
-async function fetchAllOrders() {
+async function fetchAllOrders(randomClient, randomVersion) {
     const response = await fetch('https://apollo-gateway-waaq4qt37q-uc.a.run.app', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'apollographql-client-name': 'Web',
-            'apollographql-client-version': 'Ops',
+            'apollographql-client-name': randomClient,
+            'apollographql-client-version': randomVersion
         },
         body:JSON.stringify({ 
             query: `
@@ -20,6 +20,7 @@ async function fetchAllOrders() {
                             firstName
                             lastName
                             userScore
+                            address
                         }
                     }
                 }
@@ -34,13 +35,13 @@ async function fetchAllOrders() {
     return response
 };
 
-async function fetchOneOrder(randomOrder) {
+async function fetchOneOrder(randomClient, randomVersion, randomOrder) {
     const response = await fetch('https://apollo-gateway-waaq4qt37q-uc.a.run.app', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'apollographql-client-name': 'Web',
-            'apollographql-client-Service': 'Ops',
+            'apollographql-client-name': randomClient,
+            'apollographql-client-Service': randomVersion
         },
         body:JSON.stringify({ 
             query: `query getOneOrder($orderId: ID!) {
@@ -53,6 +54,7 @@ async function fetchOneOrder(randomOrder) {
                         firstName
                         lastName
                         userScore
+                        address
                     }
                 }
             }`,
@@ -69,27 +71,26 @@ async function fetchOneOrder(randomOrder) {
     return response
 };
 
-async function fetchProductList() {
+async function fetchProductList(randomClient, randomVersion) {
     const response = await fetch('https://apollo-gateway-waaq4qt37q-uc.a.run.app', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'apollographql-client-name': 'Web',
-            'apollographql-client-version': 'Ops',
+            'apollographql-client-name': randomClient,
+            'apollographql-client-version': randomVersion
         },
         body:JSON.stringify({ 
             query: `
             query getProductList {
                 products {
-                  name
-                  upc
-                  brand
-                  price {
-                    usdPrice
-                  }
+                    name
+                    upc
+                    brand
+                    price {
+                        usdPrice
+                    }
                 }
-            }
-            `
+            }`
         })
     })
     .then((res) => res.json())
@@ -100,20 +101,38 @@ async function fetchProductList() {
     return response
 };
 
+let clients = [
+    'iOS-operations',
+    'Web-operations',
+    'Android-operations',
+    'POS-operations'
+]
+let randomClient = clients[Math.floor(Math.random() * clients.length)];
+
+let versions = [
+    '1.0',
+    '1.1',
+    '1.2',
+    '1.3',
+    '1.4',
+    '1.5'
+]
+let randomVersion = versions[Math.floor(Math.random() * versions.length)];
+
 let oddsArray = [1, 1, 1, 2, 2, 3 ]
 let random = oddsArray[Math.floor(Math.random() * oddsArray.length)];
 let randomOrder = Math.floor(Math.random() * 15 + 1);
 
 if(random === 1) {
     for (let i = 0; i < 5; i++) {
-        fetchAllOrders();
+        fetchAllOrders(randomClient, randomVersion);
     }
 } else if (random === 2 ) {
     for (let i = 0; i < 5; i++) {
-        fetchOneOrder(randomOrder);
+        fetchOneOrder(randomClient, randomVersion, randomOrder);
     }
 } else {
     for (let i = 0; i < 5; i++) {
-        fetchProductList();
+        fetchProductList(randomClient, randomVersion);
     }
-}
+};
